@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Function Control</title>
+</head>
+
+<body>
+
+    <button id="startButton" onclick="startAsyncFunction()">Start</button>
+    <button id="pauseButton" onclick="pauseAsyncFunction()">Pause</button>
+
+    <script>
+        let isPaused = false;
+        let timeoutId;
+
+        async function exampleAsyncFunction() {
+            console.log('Async function started');
+
+            for (let i = 1; i <= 5; i++) {
+                if (isPaused) {
+                    console.log('Async function paused');
+                    // Pause the function by returning a Promise that never resolves
+                    await new Promise(resolve => {
+                        const resumeButton = document.getElementById('startButton');
+                        resumeButton.onclick = function resumeFunction() {
+                            // Resume the function by resolving the Promise
+                            isPaused = false;
+                            console.log('Async function resumed');
+                            resolve();
+                        };
+                    });
+                }
+
+                // Simulate some asynchronous task
+                await new Promise(resolve => {
+                    timeoutId = setTimeout(() => {
+                        console.log(`Task ${i} completed`);
+                        resolve();
+                    }, 1000);
+                });
+            }
+
+            console.log('Async function completed');
+        }
+
+        function startAsyncFunction() {
+            if (!timeoutId || isPaused) {
+                isPaused = false;
+                exampleAsyncFunction();
+            }
+        }
+
+        function pauseAsyncFunction() {
+            isPaused = true;
+        }
+
+    </script>
+
+</body>
+
+</html>
