@@ -33,18 +33,30 @@
     <nav class="navbar navbar-expand-lg bg-body-secondary">
         <div class="container px-4 px-lg-5 justify-content-start">
             <button type="button" class="btn btn-secondary btn-sm mx-1" id="play" onclick="play()">Start Sort</button>
-            <button type="button" class="btn btn-secondary btn-sm mx-1" id="stepBack" onclick="stepBack()">Step Back</button><p> </p>
+            <!-- <button type="button" class="btn btn-secondary btn-sm mx-1" id="stepBack" onclick="stepBack()">Step Back</button><p> </p> -->
             
             <button type="button" class="btn btn-secondary btn-sm mx-1" id="pause" >Pause</button>
             <button type="button" class="btn btn-secondary btn-sm mx-1" id="continue">Continue</button>
-            <button type="button" class="btn btn-secondary btn-sm mx-1" id="stepForward" onclick="stepForward()">Step forward</button>
-            <button type="button" class="btn btn-secondary btn-sm mx-1">Fast Play</button>
+            <!-- <button type="button" class="btn btn-secondary btn-sm mx-1" id="stepForward" onclick="stepForward()">Step forward</button> -->
+            <!-- <button type="button" class="btn btn-secondary btn-sm mx-1">Fast Play</button> -->
+            <div class="btn-toolbar mx-1" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group me-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-secondary btn-sm">Play Speed</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(1)">1</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(2)">2</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(4)">4</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(8)">8</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(16)">16</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(32)">32</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="speedUp(64)">64</button>
+                </div>
+            </div>
         </div>
     </nav>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-lg-8 bg-dark-subtle" id="drawing"></div>
-            <div class="col-12 col-lg-4" id="psudoCode"></div>
+            <div class="col-12 col-lg-4 p-4" id="pseudoCode" ></div>
         </div>
     </div>
     

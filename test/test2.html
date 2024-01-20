@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歌词滚动</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #lyrics-container {
+            overflow: hidden;
+            height: 200px;
+            line-height: 2;
+        }
+
+        #lyrics {
+            transition: transform 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>歌曲标题</h1>
+
+    <div id="lyrics-container">
+        <div id="lyrics">
+            <!-- 歌词内容 -->
+            <p>第一句歌词</p>
+            <p>第二句歌词</p>
+            <p>第三句歌词</p>
+            <!-- 添加更多歌词行 -->
+        </div>
+    </div>
+
+    <script>
+        // 获取歌词容器和歌词元素
+        const lyricsContainer = document.getElementById('lyrics');
+
+        // 歌词滚动速度，可根据需要调整
+        const scrollSpeed = 1;
+
+        // 初始化歌词滚动
+        function scrollLyrics() {
+            const containerHeight = lyricsContainer.clientHeight;
+            const lyricsHeight = lyricsContainer.scrollHeight;
+
+            // 如果歌词高度大于容器高度，则启用滚动效果
+            if (lyricsHeight > containerHeight) {
+                let currentPosition = 0;
+
+                // 设置定时器，定期滚动歌词
+                setInterval(() => {
+                    currentPosition -= scrollSpeed;
+                    if (Math.abs(currentPosition) >= lyricsHeight) {
+                        currentPosition = containerHeight;
+                    }
+
+                    lyricsContainer.style.transform = `translateY(${currentPosition}px)`;
+                }, 50); // 50毫秒更新一次滚动位置，可根据需要调整
+            }
+        }
+
+        // 在页面加载完成后开始滚动歌词
+        window.onload = scrollLyrics;
+    </script>
+</body>
+
+</html>
