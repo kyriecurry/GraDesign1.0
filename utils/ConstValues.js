@@ -14,6 +14,7 @@ const COLOR_4 = "#f8f9fa"; //bg-light
 //排序颜色
 const COLOR_5 = "#175E3D";
 const COLOR_6 = "#ECD17A";
+const COLOR_7 = "#002fa7";
 
 //加速播放函数
 function speedUp(times) {

@@ -15,6 +15,11 @@ render(array);
 let isPaused = false;
 document.getElementById("pause").addEventListener("click", pause);
 
+//暂停函数
+function pause() {
+  isPaused = true;
+}
+
 //实现伪代码滚动功能
 let pseudoCode = document.getElementById("pseudoCode");
 let pseudoText = [
@@ -39,6 +44,43 @@ paraList = pseudoCode.childNodes;
 //设置第一行伪代码为高亮
 paraList[0].style.color = COLOR_1;
 paraList[0].style.backgroundColor = COLOR_3;
+
+//开始播放函数
+function play() {
+  bubbleSort(array);
+}
+
+//绘制图像函数
+function render(array, doneIndex = array.length) {
+  draw.clear();
+  const elementWidth = 20;
+  const elementMargin = 4;
+
+  array.forEach((value, index) => {
+    let distance = index * (elementWidth + elementMargin);
+    let elementHeight = value * 2;
+
+    if (index > doneIndex) {
+      let rect = draw
+        .rect(elementWidth, elementHeight)
+        .attr({ fill: COLOR_7 })
+        .move(distance + 10, 300 - elementHeight)
+        .addClass("rect");
+    } else {
+      let rect = draw
+        .rect(elementWidth, elementHeight)
+        .attr({ fill: COLOR_5 })
+        .move(distance + 10, 300 - elementHeight)
+        .addClass("rect");
+    }
+
+    let text = draw
+      .text(`${value}`)
+      .move(distance + 10, 305)
+      .font("family", "Arial")
+      .font("weight", "bold");
+  });
+}
 
 //冒泡排序及排序动画实现
 async function bubbleSort(arr) {
@@ -128,6 +170,8 @@ async function bubbleSort(arr) {
 
       paraList[5].style.color = COLOR_2;
       paraList[5].style.backgroundColor = COLOR_4;
+
+      render(array, array.length - i - 1);
     }
 
     if (!swapped) {
@@ -135,39 +179,5 @@ async function bubbleSort(arr) {
     }
   }
 
-  return iter;
-}
-
-//暂停函数
-function pause() {
-  isPaused = true;
-}
-
-//开始播放函数
-function play() {
-  bubbleSort(array);
-}
-
-//绘制图像函数
-function render(array) {
-  draw.clear();
-  const elementWidth = 20;
-  const elementMargin = 4;
-
-  array.forEach((value, index) => {
-    let distance = index * (elementWidth + elementMargin);
-    let elementHeight = value * 2;
-
-    let rect = draw
-      .rect(elementWidth, elementHeight)
-      .attr({ fill: COLOR_5 })
-      .move(distance + 10, 300 - elementHeight)
-      .addClass("rect");
-
-    let text = draw
-      .text(`${value}`)
-      .move(distance + 10, 305)
-      .font("family", "Arial")
-      .font("weight", "bold");
-  });
+  return array;
 }
